@@ -21,10 +21,11 @@ public sealed class WindowSheetlet<T> : Sheetlet<T>
         IButtonConfig buttonCfg = sheet;
         IWindowConfig windowCfg = sheet;
         IIconConfig iconCfg = sheet;
+        var textureRoot = StyleBoxHelpers.GetTextureRoot(sheet);
 
         var headerStylebox = new StyleBoxTexture
         {
-            Texture = sheet.GetTextureOr(windowCfg.WindowHeaderTexturePath, NanotrasenStylesheet.TextureRoot),
+            Texture = sheet.GetTextureOr(windowCfg.WindowHeaderTexturePath, textureRoot),
             PatchMarginBottom = 3,
             ExpandMarginBottom = 3,
             ContentMarginBottomOverride = 0,
@@ -32,20 +33,20 @@ public sealed class WindowSheetlet<T> : Sheetlet<T>
         // TODO: This would probably be better palette-based but we can leave it for now.
         var headerAlertStylebox = new StyleBoxTexture
         {
-            Texture = sheet.GetTextureOr(windowCfg.WindowHeaderAlertTexturePath, NanotrasenStylesheet.TextureRoot),
+            Texture = sheet.GetTextureOr(windowCfg.WindowHeaderAlertTexturePath, textureRoot),
             PatchMarginBottom = 3,
             ExpandMarginBottom = 3,
             ContentMarginBottomOverride = 0,
         };
         var backgroundBox = new StyleBoxTexture()
         {
-            Texture = sheet.GetTextureOr(windowCfg.WindowBackgroundPath, NanotrasenStylesheet.TextureRoot),
+            Texture = sheet.GetTextureOr(windowCfg.WindowBackgroundPath, textureRoot),
         };
         backgroundBox.SetPatchMargin(StyleBox.Margin.Horizontal | StyleBox.Margin.Bottom, 2);
         backgroundBox.SetExpandMargin(StyleBox.Margin.Horizontal | StyleBox.Margin.Bottom, 2);
         var borderedBackgroundBox = new StyleBoxTexture
         {
-            Texture = sheet.GetTextureOr(windowCfg.WindowBackgroundBorderedPath, NanotrasenStylesheet.TextureRoot),
+            Texture = sheet.GetTextureOr(windowCfg.WindowBackgroundBorderedPath, textureRoot),
         };
         borderedBackgroundBox.SetPatchMargin(StyleBox.Margin.All, 2);
         var closeButtonTex = sheet.GetTextureOr(iconCfg.CrossIconPath, NanotrasenStylesheet.TextureRoot);

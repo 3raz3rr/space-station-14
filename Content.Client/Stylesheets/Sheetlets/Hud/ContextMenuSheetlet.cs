@@ -28,10 +28,11 @@ public sealed class ContextMenuSheetlet<T> : Sheetlet<T>
     public override StyleRule[] GetRules(T sheet, object config)
     {
         IWindowConfig windowCfg = sheet;
+        var textureRoot = StyleBoxHelpers.GetTextureRoot(sheet);
 
         var borderedWindowBackground = new StyleBoxTexture
         {
-            Texture = sheet.GetTextureOr(windowCfg.WindowBackgroundBorderedPath, NanotrasenStylesheet.TextureRoot),
+            Texture = sheet.GetTextureOr(windowCfg.WindowBackgroundBorderedPath, textureRoot),
         };
         borderedWindowBackground.SetPatchMargin(StyleBox.Margin.All, ContextMenuElement.ElementMargin);
         var buttonContext = new StyleBoxTexture { Texture = Texture.White };

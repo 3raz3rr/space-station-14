@@ -16,6 +16,7 @@ public sealed class ActionSheetlet<T> : Sheetlet<T> where T: PalettedStylesheet,
     public override StyleRule[] GetRules(T sheet, object config)
     {
         IPanelConfig panelCfg = sheet;
+        var textureRoot = StyleBoxHelpers.GetTextureRoot(sheet);
 
         // TODO: absolute texture access
         var handSlotHighlightTex = ResCache.GetTexture("/Textures/Interface/Inventory/hand_slot_highlight.png");
@@ -26,7 +27,7 @@ public sealed class ActionSheetlet<T> : Sheetlet<T> where T: PalettedStylesheet,
         handSlotHighlight.SetPatchMargin(StyleBox.Margin.All, 2);
 
         var actionSearchBoxTex =
-            sheet.GetTextureOr(panelCfg.BlackPanelDarkThinBorderPath, NanotrasenStylesheet.TextureRoot);
+            sheet.GetTextureOr(panelCfg.BlackPanelDarkThinBorderPath, textureRoot);
         var actionSearchBox = new StyleBoxTexture
         {
             Texture = actionSearchBoxTex,

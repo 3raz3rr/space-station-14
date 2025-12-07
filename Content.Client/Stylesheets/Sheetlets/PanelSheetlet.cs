@@ -16,10 +16,12 @@ public sealed class PanelSheetlet<T> : Sheetlet<T>
         IWindowConfig windowCfg = sheet;
         IPanelConfig panelCfg = sheet;
 
-        var chromeTex = sheet.GetTextureOr(windowCfg.WindowBackgroundBorderedPath, NanotrasenStylesheet.TextureRoot);
-        var chromeGlassTex = sheet.GetTextureOr(windowCfg.TransparentWindowBackgroundBorderedPath, NanotrasenStylesheet.TextureRoot);
-        var neonBorderTex = sheet.GetTextureOr(panelCfg.GeometricPanelBorderPath, NanotrasenStylesheet.TextureRoot);
-        var flatTex = sheet.GetTextureOr(windowCfg.WindowBackgroundPath, NanotrasenStylesheet.TextureRoot);
+        var textureRoot = StyleBoxHelpers.GetTextureRoot(sheet);
+
+        var chromeTex = sheet.GetTextureOr(windowCfg.WindowBackgroundBorderedPath, textureRoot);
+        var chromeGlassTex = sheet.GetTextureOr(windowCfg.TransparentWindowBackgroundBorderedPath, textureRoot);
+        var neonBorderTex = sheet.GetTextureOr(panelCfg.GeometricPanelBorderPath, textureRoot);
+        var flatTex = sheet.GetTextureOr(windowCfg.WindowBackgroundPath, textureRoot);
 
         StyleBoxTexture PanelFrom(Texture texture, Color modulate, float margin, float? contentMargin = null)
         {
@@ -34,26 +36,25 @@ public sealed class PanelSheetlet<T> : Sheetlet<T>
             return box;
         }
 
-        var boxLight = PanelFrom(chromeTex, sheet.SecondaryPalette.BackgroundLight.WithAlpha(0.9f), 2, 10);
-        var boxDark = PanelFrom(chromeTex, sheet.SecondaryPalette.BackgroundDark.WithAlpha(0.95f), 2, 10);
-        var boxPositive = PanelFrom(chromeTex, sheet.PositivePalette.Background, 2, 10);
-        var boxNegative = PanelFrom(chromeTex, sheet.NegativePalette.Background, 2, 10);
-        var boxHighlight = PanelFrom(chromeTex, sheet.HighlightPalette.Background, 2, 10);
+        var boxLight = PanelFrom(chromeTex, sheet.SecondaryPalette.BackgroundLight, 12, 14);
+        var boxDark = PanelFrom(chromeTex, sheet.SecondaryPalette.BackgroundDark, 12, 14);
+        var boxPositive = PanelFrom(chromeTex, sheet.PositivePalette.Background, 12, 14);
+        var boxNegative = PanelFrom(chromeTex, sheet.NegativePalette.Background, 12, 14);
+        var boxHighlight = PanelFrom(chromeTex, sheet.HighlightPalette.Background, 12, 14);
 
-        var section = PanelFrom(flatTex, sheet.SecondaryPalette.Background, 1, 8);
-        section.SetContentMarginOverride(StyleBox.Margin.All, 8);
-        var sectionDim = PanelFrom(flatTex, sheet.SecondaryPalette.BackgroundDark, 1, 6);
-        var sectionEmphasis = PanelFrom(flatTex, sheet.PositivePalette.Background, 1, 8);
+        var section = PanelFrom(flatTex, sheet.SecondaryPalette.BackgroundLight, 12, 12);
+        section.SetContentMarginOverride(StyleBox.Margin.All, 10);
+        var sectionDim = PanelFrom(flatTex, sheet.SecondaryPalette.BackgroundDark, 12, 10);
+        var sectionEmphasis = PanelFrom(flatTex, sheet.PositivePalette.Background.WithAlpha(0.92f), 12, 12);
 
-        var glassPanel = PanelFrom(chromeGlassTex, sheet.SecondaryPalette.Background.WithAlpha(0.8f), 2, 10);
-        glassPanel.Modulate = sheet.SecondaryPalette.BackgroundLight.WithAlpha(0.82f);
-        glassPanel.SetPatchMargin(StyleBox.Margin.All, 3);
+        var glassPanel = PanelFrom(chromeGlassTex, sheet.SecondaryPalette.BackgroundLight.WithAlpha(0.95f), 12, 14);
+        glassPanel.SetPatchMargin(StyleBox.Margin.All, 14);
 
-        var neonFrame = PanelFrom(neonBorderTex, sheet.HighlightPalette.Text.WithAlpha(0.9f), 4, 12);
-        neonFrame.SetPadding(StyleBox.Margin.All, 2);
+        var neonFrame = PanelFrom(neonBorderTex, sheet.HighlightPalette.Text.WithAlpha(0.95f), 18, 14);
+        neonFrame.SetPadding(StyleBox.Margin.All, 4);
 
-        var glowHeader = PanelFrom(chromeGlassTex, sheet.PrimaryPalette.BackgroundLight.WithAlpha(0.78f), 2, 10);
-        glowHeader.SetPatchMargin(StyleBox.Margin.All, 3);
+        var glowHeader = PanelFrom(chromeGlassTex, sheet.PrimaryPalette.BackgroundLight, 14, 14);
+        glowHeader.SetPatchMargin(StyleBox.Margin.All, 14);
 
         return
         [
