@@ -44,6 +44,15 @@ public static class StyleClass
     public const string LabelMonospaceHeading = "ConsoleText";
     public const string LabelMonospaceSubHeading = "ConsoleText";
 
+    public const string Section = "Section";
+    public const string SectionDim = "SectionDim";
+    public const string SectionEmphasis = "SectionEmphasis";
+    public const string ChatPanel = "ChatPanel";
+    public const string ChatSubPanel = "ChatSubPanel";
+    public const string GlassPanel = "GlassPanel";
+    public const string NeonFrame = "NeonFrame";
+    public const string GlowHeader = "GlowHeader";
+
     public const string BackgroundPanel = "BackgroundPanel"; // replaces `AngleRect`
     public const string BackgroundPanelOpenLeft = "BackgroundPanelOpenLeft"; // replaces `BackgroundOpenLeft`
     public const string BackgroundPanelOpenRight = "BackgroundPanelOpenRight"; // replaces `BackgroundOpenRight`

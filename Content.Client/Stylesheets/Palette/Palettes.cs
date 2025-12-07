@@ -8,6 +8,16 @@ namespace Content.Client.Stylesheets.Palette;
 /// </remarks>
 public static class Palettes
 {
+    public static readonly ColorPalette Carbon = ColorPalette.FromHexBase("#1f2330", lightnessShift: 0.05f, chromaShift: 0.01f);
+    public static readonly ColorPalette Cobalt = ColorPalette.FromHexBase("#3f4d63", lightnessShift: 0.07f, chromaShift: 0.0125f);
+    public static readonly ColorPalette Steel = ColorPalette.FromHexBase("#2d3546", lightnessShift: 0.06f, chromaShift: 0.01f);
+
+    // neon/gradient tones
+    public static readonly ColorPalette Nightfall = ColorPalette.FromHexBase("#0c1228", lightnessShift: 0.08f, chromaShift: 0.012f);
+    public static readonly ColorPalette NeonViolet = ColorPalette.FromHexBase("#3d1870", lightnessShift: 0.12f, chromaShift: 0.02f);
+    public static readonly ColorPalette ElectricBlue = ColorPalette.FromHexBase("#2ad1ff", lightnessShift: 0.12f, chromaShift: 0.018f);
+    public static readonly ColorPalette Magenta = ColorPalette.FromHexBase("#ba2dff", lightnessShift: 0.12f, chromaShift: 0.02f);
+
     // muted tones
     public static readonly ColorPalette Navy = ColorPalette.FromHexBase("#4f5376", lightnessShift: 0.05f, chromaShift: 0.0045f);
     public static readonly ColorPalette Cyan = ColorPalette.FromHexBase("#42586a", lightnessShift: 0.05f, chromaShift: 0.0045f);

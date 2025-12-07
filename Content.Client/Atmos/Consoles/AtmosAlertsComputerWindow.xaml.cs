@@ -49,11 +49,11 @@ public sealed partial class AtmosAlertsComputerWindow : FancyWindow
     private Color _monitorBlipColor = Color.Cyan;
     private Color _untrackedEntColor = Color.DimGray;
     private Color _regionBaseColor = new Color(154, 154, 154);
-    private Color _inactiveColor = StyleNano.DisabledFore;
-    private Color _statusTextColor = StyleNano.GoodGreenFore;
-    private Color _goodColor = Color.LimeGreen;
-    private Color _warningColor = new Color(255, 182, 72);
-    private Color _dangerColor = new Color(255, 67, 67);
+    private Color _inactiveColor = UiTheme.DisabledForeground;
+    private Color _statusTextColor = UiTheme.Success;
+    private Color _goodColor = UiTheme.Success;
+    private Color _warningColor = UiTheme.Warning;
+    private Color _dangerColor = UiTheme.Danger;
 
     public AtmosAlertsComputerWindow(AtmosAlertsComputerBoundUserInterface userInterface, EntityUid? owner)
     {
