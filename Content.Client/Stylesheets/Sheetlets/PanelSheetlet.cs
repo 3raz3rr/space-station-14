@@ -1,4 +1,5 @@
 using Content.Client.Stylesheets.SheetletConfigs;
+using Content.Client.Stylesheets.Stylesheets;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
@@ -7,15 +8,17 @@ using static Content.Client.Stylesheets.StylesheetHelpers;
 namespace Content.Client.Stylesheets.Sheetlets;
 
 [CommonSheetlet]
-public sealed class PanelSheetlet<T> : Sheetlet<T> where T : PalettedStylesheet, IButtonConfig
+public sealed class PanelSheetlet<T> : Sheetlet<T>
+    where T : PalettedStylesheet, IButtonConfig, IWindowConfig, IPanelConfig
 {
     public override StyleRule[] GetRules(T sheet, object config)
     {
         IWindowConfig windowCfg = sheet;
+        IPanelConfig panelCfg = sheet;
 
         var chromeTex = sheet.GetTextureOr(windowCfg.WindowBackgroundBorderedPath, NanotrasenStylesheet.TextureRoot);
         var chromeGlassTex = sheet.GetTextureOr(windowCfg.TransparentWindowBackgroundBorderedPath, NanotrasenStylesheet.TextureRoot);
-        var neonBorderTex = sheet.GetTextureOr(windowCfg.GeometricPanelBorderPath, NanotrasenStylesheet.TextureRoot);
+        var neonBorderTex = sheet.GetTextureOr(panelCfg.GeometricPanelBorderPath, NanotrasenStylesheet.TextureRoot);
         var flatTex = sheet.GetTextureOr(windowCfg.WindowBackgroundPath, NanotrasenStylesheet.TextureRoot);
 
         StyleBoxTexture PanelFrom(Texture texture, Color modulate, float margin, float? contentMargin = null)
