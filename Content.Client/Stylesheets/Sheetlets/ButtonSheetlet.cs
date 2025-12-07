@@ -123,9 +123,9 @@ public static class StyleBoxHelpers
         {
             Texture = sheet.GetTextureOr(sheet.BaseButtonPath, NanotrasenStylesheet.TextureRoot),
         };
-        baseBox.SetPatchMargin(StyleBox.Margin.All, 10);
-        baseBox.SetPadding(StyleBox.Margin.All, 1);
-        baseBox.SetContentMarginOverride(StyleBox.Margin.Vertical, 2);
+        baseBox.SetPatchMargin(StyleBox.Margin.All, 12);
+        baseBox.SetPadding(StyleBox.Margin.All, 2);
+        baseBox.SetContentMarginOverride(StyleBox.Margin.Vertical, 4);
         baseBox.SetContentMarginOverride(StyleBox.Margin.Horizontal, 14);
         return baseBox;
     }
@@ -135,7 +135,7 @@ public static class StyleBoxHelpers
         var openLeftBox = new StyleBoxTexture(BaseStyleBox(sheet))
         {
             Texture = new AtlasTexture(sheet.GetTextureOr(sheet.OpenLeftButtonPath, NanotrasenStylesheet.TextureRoot),
-                UIBox2.FromDimensions(new Vector2(10, 0), new Vector2(14, 24))),
+                UIBox2.FromDimensions(new Vector2(10, 0), new Vector2(14, 32))),
         };
         openLeftBox.SetPatchMargin(StyleBox.Margin.Left, 0);
         openLeftBox.SetContentMarginOverride(StyleBox.Margin.Left, 8);
@@ -148,7 +148,7 @@ public static class StyleBoxHelpers
         var openRightBox = new StyleBoxTexture(BaseStyleBox(sheet))
         {
             Texture = new AtlasTexture(sheet.GetTextureOr(sheet.OpenRightButtonPath, NanotrasenStylesheet.TextureRoot),
-                UIBox2.FromDimensions(new Vector2(0, 0), new Vector2(14, 24))),
+                UIBox2.FromDimensions(new Vector2(0, 0), new Vector2(14, 32))),
         };
         openRightBox.SetPatchMargin(StyleBox.Margin.Right, 0);
         openRightBox.SetContentMarginOverride(StyleBox.Margin.Right, 8);
@@ -161,7 +161,7 @@ public static class StyleBoxHelpers
         var openBothBox = new StyleBoxTexture(BaseStyleBox(sheet))
         {
             Texture = new AtlasTexture(sheet.GetTextureOr(sheet.OpenBothButtonPath, NanotrasenStylesheet.TextureRoot),
-                UIBox2.FromDimensions(new Vector2(10, 0), new Vector2(3, 24))),
+                UIBox2.FromDimensions(new Vector2(10, 0), new Vector2(3, 32))),
         };
         openBothBox.SetPatchMargin(StyleBox.Margin.Horizontal, 0);
         openBothBox.SetContentMarginOverride(StyleBox.Margin.Horizontal, 8);

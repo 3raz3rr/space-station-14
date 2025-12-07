@@ -11,67 +11,46 @@ public sealed class PanelSheetlet<T> : Sheetlet<T> where T : PalettedStylesheet,
 {
     public override StyleRule[] GetRules(T sheet, object config)
     {
-        IButtonConfig buttonCfg = sheet;
+        IWindowConfig windowCfg = sheet;
 
-        var boxLight = new StyleBoxFlat()
-        {
-            BackgroundColor = sheet.SecondaryPalette.BackgroundLight,
-        };
-        var boxDark = new StyleBoxFlat()
-        {
-            BackgroundColor = sheet.SecondaryPalette.BackgroundDark,
-        };
-        var boxPositive = new StyleBoxFlat { BackgroundColor = sheet.PositivePalette.Background };
-        var boxNegative = new StyleBoxFlat { BackgroundColor = sheet.NegativePalette.Background };
-        var boxHighlight = new StyleBoxFlat { BackgroundColor = sheet.HighlightPalette.Background };
+        var chromeTex = sheet.GetTextureOr(windowCfg.WindowBackgroundBorderedPath, NanotrasenStylesheet.TextureRoot);
+        var chromeGlassTex = sheet.GetTextureOr(windowCfg.TransparentWindowBackgroundBorderedPath, NanotrasenStylesheet.TextureRoot);
+        var neonBorderTex = sheet.GetTextureOr(windowCfg.GeometricPanelBorderPath, NanotrasenStylesheet.TextureRoot);
+        var flatTex = sheet.GetTextureOr(windowCfg.WindowBackgroundPath, NanotrasenStylesheet.TextureRoot);
 
-        var section = new StyleBoxFlat
+        StyleBoxTexture PanelFrom(Texture texture, Color modulate, float margin, float? contentMargin = null)
         {
-            BackgroundColor = sheet.SecondaryPalette.Background,
-            BorderColor = sheet.PrimaryPalette.BackgroundDark,
-            BorderThickness = new Thickness(1f),
-        };
+            var box = new StyleBoxTexture
+            {
+                Texture = texture,
+                Modulate = modulate,
+            };
+            box.SetPatchMargin(StyleBox.Margin.All, margin);
+            if (contentMargin is { } content)
+                box.SetContentMarginOverride(StyleBox.Margin.All, content);
+            return box;
+        }
+
+        var boxLight = PanelFrom(chromeTex, sheet.SecondaryPalette.BackgroundLight.WithAlpha(0.9f), 2, 10);
+        var boxDark = PanelFrom(chromeTex, sheet.SecondaryPalette.BackgroundDark.WithAlpha(0.95f), 2, 10);
+        var boxPositive = PanelFrom(chromeTex, sheet.PositivePalette.Background, 2, 10);
+        var boxNegative = PanelFrom(chromeTex, sheet.NegativePalette.Background, 2, 10);
+        var boxHighlight = PanelFrom(chromeTex, sheet.HighlightPalette.Background, 2, 10);
+
+        var section = PanelFrom(flatTex, sheet.SecondaryPalette.Background, 1, 8);
         section.SetContentMarginOverride(StyleBox.Margin.All, 8);
+        var sectionDim = PanelFrom(flatTex, sheet.SecondaryPalette.BackgroundDark, 1, 6);
+        var sectionEmphasis = PanelFrom(flatTex, sheet.PositivePalette.Background, 1, 8);
 
-        var sectionDim = new StyleBoxFlat
-        {
-            BackgroundColor = sheet.SecondaryPalette.BackgroundDark,
-            BorderColor = sheet.PrimaryPalette.BackgroundDark,
-            BorderThickness = new Thickness(1f),
-        };
-        sectionDim.SetContentMarginOverride(StyleBox.Margin.All, 6);
+        var glassPanel = PanelFrom(chromeGlassTex, sheet.SecondaryPalette.Background.WithAlpha(0.8f), 2, 10);
+        glassPanel.Modulate = sheet.SecondaryPalette.BackgroundLight.WithAlpha(0.82f);
+        glassPanel.SetPatchMargin(StyleBox.Margin.All, 3);
 
-        var sectionEmphasis = new StyleBoxFlat
-        {
-            BackgroundColor = sheet.PositivePalette.Background,
-            BorderColor = sheet.PositivePalette.PressedElement,
-            BorderThickness = new Thickness(1f),
-        };
-        sectionEmphasis.SetContentMarginOverride(StyleBox.Margin.All, 8);
+        var neonFrame = PanelFrom(neonBorderTex, sheet.HighlightPalette.Text.WithAlpha(0.9f), 4, 12);
+        neonFrame.SetPadding(StyleBox.Margin.All, 2);
 
-        var glassPanel = new StyleBoxFlat
-        {
-            BackgroundColor = sheet.SecondaryPalette.Background.WithAlpha(0.78f),
-            BorderColor = sheet.HighlightPalette.HoveredElement,
-            BorderThickness = new Thickness(1.5f),
-        };
-        glassPanel.SetContentMarginOverride(StyleBox.Margin.All, 10);
-
-        var neonFrame = new StyleBoxFlat
-        {
-            BackgroundColor = sheet.SecondaryPalette.BackgroundDark.WithAlpha(0.72f),
-            BorderColor = sheet.HighlightPalette.Text,
-            BorderThickness = new Thickness(2f),
-        };
-        neonFrame.SetContentMarginOverride(StyleBox.Margin.All, 12);
-
-        var glowHeader = new StyleBoxFlat
-        {
-            BackgroundColor = sheet.PrimaryPalette.BackgroundLight.WithAlpha(0.72f),
-            BorderColor = sheet.HighlightPalette.Text,
-            BorderThickness = new Thickness(1.5f),
-        };
-        glowHeader.SetContentMarginOverride(StyleBox.Margin.All, 10);
+        var glowHeader = PanelFrom(chromeGlassTex, sheet.PrimaryPalette.BackgroundLight.WithAlpha(0.78f), 2, 10);
+        glowHeader.SetPatchMargin(StyleBox.Margin.All, 3);
 
         return
         [
