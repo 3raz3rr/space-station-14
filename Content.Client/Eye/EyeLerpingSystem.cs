@@ -3,7 +3,6 @@ using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
-using Robust.Client.Physics;
 using Robust.Client.Player;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -64,11 +63,8 @@ public sealed class EyeLerpingSystem : EntitySystem
         lerpInfo.TargetZoom = component.Zoom;
         lerpInfo.LastZoom = lerpInfo.TargetZoom;
 
-        if (component.Eye != null)
-        {
-            _eye.SetRotation(uid, lerpInfo.TargetRotation, component);
-            _eye.SetZoom(uid, lerpInfo.TargetZoom, component);
-        }
+        _eye.SetRotation(uid, lerpInfo.TargetRotation, component);
+        _eye.SetZoom(uid, lerpInfo.TargetZoom, component);
     }
 
     public void RemoveEye(EntityUid uid)
@@ -177,7 +173,7 @@ public sealed class EyeLerpingSystem : EntitySystem
         const double lerpMinimum = 0.00001;
         var query = AllEntityQuery<LerpingEyeComponent, EyeComponent, TransformComponent>();
 
-        while (query.MoveNext(out var entity, out var lerpInfo, out var eye, out var xform))
+        while (query.MoveNext(out var entity, out var lerpInfo, out var eye, out _))
         {
             // Handle zoom
             var zoomDiff = Vector2.Lerp(lerpInfo.LastZoom, lerpInfo.TargetZoom, tickFraction);
@@ -195,7 +191,7 @@ public sealed class EyeLerpingSystem : EntitySystem
             TryComp<InputMoverComponent>(entity, out var mover);
 
             // This needs to be recomputed every frame, as if this is simply the grid rotation, then we need to account for grid angle lerping.
-            lerpInfo.TargetRotation = GetRotation(entity, xform, mover);
+            //lerpInfo.TargetRotation = GetRotation(entity, xform, mover);
 
             if (!NeedsLerp(mover))
             {
