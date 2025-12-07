@@ -25,6 +25,30 @@ public sealed class PanelSheetlet<T> : Sheetlet<T> where T : PalettedStylesheet,
         var boxNegative = new StyleBoxFlat { BackgroundColor = sheet.NegativePalette.Background };
         var boxHighlight = new StyleBoxFlat { BackgroundColor = sheet.HighlightPalette.Background };
 
+        var section = new StyleBoxFlat
+        {
+            BackgroundColor = sheet.SecondaryPalette.Background,
+            BorderColor = sheet.PrimaryPalette.BackgroundDark,
+            BorderThickness = new Thickness(1f),
+        };
+        section.SetContentMarginOverride(StyleBox.Margin.All, 8);
+
+        var sectionDim = new StyleBoxFlat
+        {
+            BackgroundColor = sheet.SecondaryPalette.BackgroundDark,
+            BorderColor = sheet.PrimaryPalette.BackgroundDark,
+            BorderThickness = new Thickness(1f),
+        };
+        sectionDim.SetContentMarginOverride(StyleBox.Margin.All, 6);
+
+        var sectionEmphasis = new StyleBoxFlat
+        {
+            BackgroundColor = sheet.PositivePalette.Background,
+            BorderColor = sheet.PositivePalette.PressedElement,
+            BorderThickness = new Thickness(1f),
+        };
+        sectionEmphasis.SetContentMarginOverride(StyleBox.Margin.All, 8);
+
         return
         [
             E<PanelContainer>().Class(StyleClass.PanelLight).Panel(boxLight),
@@ -33,6 +57,12 @@ public sealed class PanelSheetlet<T> : Sheetlet<T> where T : PalettedStylesheet,
             E<PanelContainer>().Class(StyleClass.Positive).Panel(boxPositive),
             E<PanelContainer>().Class(StyleClass.Negative).Panel(boxNegative),
             E<PanelContainer>().Class(StyleClass.Highlight).Panel(boxHighlight),
+
+            E<PanelContainer>().Class(StyleClass.Section).Panel(section),
+            E<PanelContainer>().Class(StyleClass.SectionDim).Panel(sectionDim),
+            E<PanelContainer>().Class(StyleClass.SectionEmphasis).Panel(sectionEmphasis),
+            E<PanelContainer>().Class(StyleClass.ChatPanel).Panel(section),
+            E<PanelContainer>().Class(StyleClass.ChatSubPanel).Panel(sectionDim),
 
             // TODO: this should probably be cleaned up but too many UIs rely on this hardcoded color so I'm scared to touch it
             E<PanelContainer>()

@@ -225,7 +225,7 @@ namespace Content.Client.Construction.UI
 
                 var itemButtonPanelContainer = new PanelContainer
                 {
-                    PanelOverride = new StyleBoxFlat { BackgroundColor = StyleNano.ButtonColorDefault },
+                    PanelOverride = new StyleBoxFlat { BackgroundColor = UiTheme.PanelDark },
                     Children = { itemButton },
                 };
 
@@ -307,8 +307,8 @@ namespace Content.Client.Construction.UI
             if (button.Parent is not PanelContainer buttonPanel)
                 return;
 
-            button.Children.Single().Modulate = select ? Color.Green : Color.White;
-            var buttonColor = select ? StyleNano.ButtonColorDefault : Color.Transparent;
+            button.Children.Single().Modulate = select ? UiTheme.Success : Color.White;
+            var buttonColor = select ? UiTheme.Button : UiTheme.PanelDark;
             buttonPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = buttonColor };
         }
 
