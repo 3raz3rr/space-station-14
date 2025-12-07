@@ -1,4 +1,3 @@
-using System.Numerics;
 using Content.Client.Stylesheets.SheetletConfigs;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
@@ -17,27 +16,20 @@ public sealed class PanelSheetlet<T> : Sheetlet<T> where T : PalettedStylesheet,
         var boxLight = new StyleBoxFlat()
         {
             BackgroundColor = sheet.SecondaryPalette.BackgroundLight,
-            CornerRadius = new Vector4(6f),
-            ShadowColor = sheet.HighlightPalette.Element.WithAlpha(0.2f),
-            ShadowSoftness = 6f,
         };
         var boxDark = new StyleBoxFlat()
         {
             BackgroundColor = sheet.SecondaryPalette.BackgroundDark,
-            CornerRadius = new Vector4(6f),
         };
-        var boxPositive = new StyleBoxFlat { BackgroundColor = sheet.PositivePalette.Background, CornerRadius = new Vector4(6f) };
-        var boxNegative = new StyleBoxFlat { BackgroundColor = sheet.NegativePalette.Background, CornerRadius = new Vector4(6f) };
-        var boxHighlight = new StyleBoxFlat { BackgroundColor = sheet.HighlightPalette.Background, CornerRadius = new Vector4(6f) };
+        var boxPositive = new StyleBoxFlat { BackgroundColor = sheet.PositivePalette.Background };
+        var boxNegative = new StyleBoxFlat { BackgroundColor = sheet.NegativePalette.Background };
+        var boxHighlight = new StyleBoxFlat { BackgroundColor = sheet.HighlightPalette.Background };
 
         var section = new StyleBoxFlat
         {
             BackgroundColor = sheet.SecondaryPalette.Background,
             BorderColor = sheet.PrimaryPalette.BackgroundDark,
             BorderThickness = new Thickness(1f),
-            ShadowColor = sheet.HighlightPalette.Element.WithAlpha(0.22f),
-            ShadowSoftness = 8f,
-            CornerRadius = new Vector4(8f),
         };
         section.SetContentMarginOverride(StyleBox.Margin.All, 8);
 
@@ -46,7 +38,6 @@ public sealed class PanelSheetlet<T> : Sheetlet<T> where T : PalettedStylesheet,
             BackgroundColor = sheet.SecondaryPalette.BackgroundDark,
             BorderColor = sheet.PrimaryPalette.BackgroundDark,
             BorderThickness = new Thickness(1f),
-            CornerRadius = new Vector4(8f),
         };
         sectionDim.SetContentMarginOverride(StyleBox.Margin.All, 6);
 
@@ -55,7 +46,6 @@ public sealed class PanelSheetlet<T> : Sheetlet<T> where T : PalettedStylesheet,
             BackgroundColor = sheet.PositivePalette.Background,
             BorderColor = sheet.PositivePalette.PressedElement,
             BorderThickness = new Thickness(1f),
-            CornerRadius = new Vector4(8f),
         };
         sectionEmphasis.SetContentMarginOverride(StyleBox.Margin.All, 8);
 
@@ -64,10 +54,6 @@ public sealed class PanelSheetlet<T> : Sheetlet<T> where T : PalettedStylesheet,
             BackgroundColor = sheet.SecondaryPalette.Background.WithAlpha(0.78f),
             BorderColor = sheet.HighlightPalette.HoveredElement,
             BorderThickness = new Thickness(1.5f),
-            ShadowColor = sheet.HighlightPalette.Element.WithAlpha(0.35f),
-            ShadowOffset = new Vector2(0f, 2f),
-            ShadowSoftness = 10f,
-            CornerRadius = new Vector4(10f),
         };
         glassPanel.SetContentMarginOverride(StyleBox.Margin.All, 10);
 
@@ -76,9 +62,6 @@ public sealed class PanelSheetlet<T> : Sheetlet<T> where T : PalettedStylesheet,
             BackgroundColor = sheet.SecondaryPalette.BackgroundDark.WithAlpha(0.72f),
             BorderColor = sheet.HighlightPalette.Text,
             BorderThickness = new Thickness(2f),
-            ShadowColor = sheet.HighlightPalette.HoveredElement.WithAlpha(0.25f),
-            ShadowSoftness = 12f,
-            CornerRadius = new Vector4(12f, 12f, 6f, 6f),
         };
         neonFrame.SetContentMarginOverride(StyleBox.Margin.All, 12);
 
@@ -87,9 +70,6 @@ public sealed class PanelSheetlet<T> : Sheetlet<T> where T : PalettedStylesheet,
             BackgroundColor = sheet.PrimaryPalette.BackgroundLight.WithAlpha(0.72f),
             BorderColor = sheet.HighlightPalette.Text,
             BorderThickness = new Thickness(1.5f),
-            ShadowColor = sheet.HighlightPalette.Element.WithAlpha(0.32f),
-            ShadowSoftness = 10f,
-            CornerRadius = new Vector4(10f, 10f, 6f, 6f),
         };
         glowHeader.SetContentMarginOverride(StyleBox.Margin.All, 10);
 
